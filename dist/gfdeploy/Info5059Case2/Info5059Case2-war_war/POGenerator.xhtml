@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:m="http://java.sun.com/jsf/composite/mnu"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:head>
+            <title>Mobile JSF page</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+            <style>#box1 { margin-left: 25%; margin-top: 55%; width:50%; border-style: solid; }</style>
+        </h:head>
+        <h:body>
+            <h:form>
+                <div data-role="page" id="home">
+                    <div data-role="header"><h1>Generate PO</h1></div>
+                    <div data-role="content">
+                             <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a">
+                                            <p>Select Vendor</p>
+                                        </div>
+                                        <div class="ui-block-b">
+                                            <h:selectOneMenu value="#{generatorViewModel.vendorno}" id="vendorno">
+                                                <f:selectItems value="#{vendorViewModel.vendornos}" />
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b">
+                                 <h:commandButton action="#{generatorViewModel.changeVendor()}" value="Select" id="selectVendor" />
+                             </div>
+                            </div>
+                    <ui:fragment rendered="#{generatorViewModel.pickedVendor}">
+                    <div data-role="collapsible-set">
+                    <div data-role="collapsible" data-collapsed="true">
+                        <h3><h:outputText value="#{generatorViewModel.displayName}"></h:outputText>'s Information</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">No:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.vendorNo}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">Address:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.address}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">City:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.city}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">Province:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.province}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">Email"</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.email}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">Postal:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.postalCode}" /></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">Type:</div>
+                            <div class="ui-block-b"><h:outputText value="#{vendorViewModel.type}" /></div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true">
+                        <h3>Products</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a" align="center">Product</div>
+                            <div class="ui-block-b" align="center">QTY</div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h:selectOneMenu value="#{generatorViewModel.prodcd}" id="prodcd"  >  
+                                    <f:selectItems value="#{generatorViewModel.items}" />
+                                </h:selectOneMenu>
+                            </div>
+                                <div class="ui-block-b">                                            
+                                    <h:selectOneMenu value="#{generatorViewModel.qty}" id="eoq" >
+                                        <f:selectItem itemValue="EOQ" itemLabel="EOQ"/>
+                                        <f:selectItem itemValue="0" itemLabel="0" />
+                                        <f:selectItem itemValue="1" itemLabel="1" /> 
+                                        <f:selectItem itemValue="2" itemLabel="2" /> 
+                                        <f:selectItem itemValue="3" itemLabel="3" /> 
+                                        <f:selectItem itemValue="4" itemLabel="4" /> 
+                                        <f:selectItem itemValue="5" itemLabel="5" /> 
+                                        <f:selectItem itemValue="6" itemLabel="6" /> 
+                                        <f:selectItem itemValue="7" itemLabel="7" /> 
+                                        <f:selectItem itemValue="8" itemLabel="8" /> 
+                                        <f:selectItem itemValue="9" itemLabel="9" />
+                                        <f:selectItem itemValue="10" itemLabel="10" /> 
+                                 </h:selectOneMenu>
+                            </div>
+
+                        </div>
+                        <h:commandButton action="#{generatorViewModel.addToPO()}" value="Add to PO" id="addToPo" />
+                      </div>
+                        
+                    </div>
+                </ui:fragment>
+                        <ui:fragment rendered="#{generatorViewModel.pickedItem}">
+                            <div data-role="collapsible-set">
+                            <div data-role="collapsible" data-collapsed="false">
+                        <h3><h:outputText value="Purchase Order Details"></h:outputText></h3>
+                                <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a" align="left">
+                                            Product
+                                        </div>
+                                        <div class="ui-block-b" align="center">
+                                            QTY
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b" align ="right">
+                                 Extended
+                             </div>
+                             </div>
+                        <ui:repeat value="#{generatorViewModel.poArray}" var="singleProd">
+                            <ui:fragment rendered="#{singleProd.qty > 0}">
+                                <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a" align="left">
+                                            <h:outputText value="#{singleProd.prodname}"/>
+                                        </div>
+                                        <div class="ui-block-b" align="center">
+                                            <h:outputText value="#{singleProd.qty}" />
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b" align ="right">
+                                 <h:outputText value="#{singleProd.ext}" >
+                                     <f:convertNumber maxFractionDigits="2" groupingUsed="true"
+                                                      currencySymbol="$" maxIntegerDigits="7" type="currency" />
+                                 </h:outputText>
+                             </div>
+                             </div>
+                                
+                            </ui:fragment>                        
+                        </ui:repeat>
+                             <p align="right">------------------</p>
+                             <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a" align="left">
+                                            
+                                        </div>
+                                        <div class="ui-block-b" align="right">
+                                            Sub:
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b" align ="right">
+                                 <h:outputText value="#{generatorViewModel.subTotal}" >
+                                     <f:convertNumber maxFractionDigits="2" groupingUsed="true"
+                                                      currencySymbol="$" maxIntegerDigits="7" type="currency" />
+                                 </h:outputText>
+                             </div>
+                             </div>
+                             <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a" align="left">
+                                            
+                                        </div>
+                                        <div class="ui-block-b" align="right">
+                                            Tax:
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b" align ="right">
+                                 <h:outputText value="#{generatorViewModel.tax}" >
+                                     <f:convertNumber maxFractionDigits="2" groupingUsed="true"
+                                                      currencySymbol="$" maxIntegerDigits="7" type="currency" />
+                                 </h:outputText>
+                             </div>
+                             </div>
+                             <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-grid-a">
+                                        <div class="ui-block-a" align="left">
+                                            
+                                        </div>
+                                        <div class="ui-block-b" align="right">
+                                            Total:
+                                        </div>
+                                    </div>
+                                </div>
+                             <div class="ui-block-b" align ="right">
+                                 <h:outputText value="#{generatorViewModel.total}" >
+                                     <f:convertNumber maxFractionDigits="2" groupingUsed="true"
+                                                      currencySymbol="$" maxIntegerDigits="7" type="currency" />
+                                 </h:outputText>
+                             </div>
+                             </div>
+                             <div align="center">
+                                 <h:commandButton action="#{generatorViewModel.poAdd()}" value="Add PO" id="poAdd"  />
+                             </div>
+                             
+                             
+                             </div>
+                             </div>
+                        </ui:fragment>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    <div id="box1"><h:outputText value="#{generatorViewModel.msg}" escape="false" /></div>
+                    <div data-role="footer" data-position="fixed" >
+                        <div data-role='navbar'>
+                        <ul>
+                            <m:MenuItem jsf="V" caption="Add Vendor" />
+                            <m:MenuItem jsf="P" caption="Add Product" />
+                            <m:MenuItem jsf="O" caption="Generate PO" />
+                        </ul>
+                            </div>
+                            <div data-role='navbar'>
+                                <ul>
+                                    <m:MenuItem jsf="B" caption="Product View" />
+                                    <m:MenuItem jsf="POV" caption="PO Viewer" />
+                                </ul>
+                            </div>                           
+                        </div>
+                    </div>
+            </h:form>
+        </h:body>
+    </html>
+

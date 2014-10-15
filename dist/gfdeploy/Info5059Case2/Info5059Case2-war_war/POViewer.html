@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:m="http://java.sun.com/jsf/composite/mnu"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>View Vendor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+        <script type="text/javascript" src="scripts/getvendorlist.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="home">
+            <div data-role="header" style="text-align: center;"><p></p>
+                <img src="img/ABCLogo3.png" alt="" /><p></p>
+                ABC Procurement v2.0<p></p>
+            </div>
+            <div data-role="content">
+                <h3>PO Viewer</h3>
+                <div data-role="collapsible-set" id="poset">
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>Select PO</h3>
+                        <div class="ui-grid-b">
+                            <div class="ui-block-a">
+                                <div style="padding-top: 15px;">Vendor #</div>
+                            </div>
+                            <div class="ui-block-b">
+                                <select id="vendornos">
+                                </select>
+                            </div>
+                            <div class="ui-block-c">
+                                <button type="submit" id="chooseVendor">Select</button>
+                            </div>
+                        </div>
+                        <div class="ui-grid-b" id="poGrid">
+                            <div class="ui-block-a">
+                                <div style="padding-top: 15px;">PO #</div>
+                            </div>
+                            <div class="ui-block-b">
+                                <select id="ponos">
+                                </select>
+                            </div>
+                            <div class="ui-block-c">
+                                <button type="submit" id="choosePO">Select</button>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                                 
+
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed" >
+                        <div data-role='navbar'>
+                        <ul>
+                            <m:MenuItem jsf="V" caption="Add Vendor" />
+                            <m:MenuItem jsf="P" caption="Add Product" />
+                            <m:MenuItem jsf="O" caption="Generate PO" />
+                        </ul>
+                            </div>
+                            <div data-role='navbar'>
+                                <ul>
+                                    <m:MenuItem jsf="B" caption="Product View" />
+                                    <m:MenuItem jsf="POV" caption="PO Viewer" />
+                                </ul>
+                            </div>                           
+                        </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webpages>
+    <webpage url="AddVendor.jsf" id="V" />
+    <webpage url="AddProduct.jsf" id="P" />
+    <webpage url="POGenerator.jsf" id="O" />
+    <webpage url="ProductViewer.jsf" id="B" />
+    <webpage url="POViewer.html" id="POV" />
+</webpages>

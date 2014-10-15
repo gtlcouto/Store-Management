@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:m="http://java.sun.com/jsf/composite/mnu"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:head>
+            <title>Add Vendor</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+            <style>#box1 { margin-left: 25%; margin-top: 55%; width:50%; border-style: solid; }</style>
+        </h:head>
+        <h:body>
+            <h:form>
+                <div data-role="page" id="home">
+                    <div data-role="header"><h1>Add Vendor</h1></div>
+                    <div data-role="content">
+                            <p>Add a new Vendor</p>
+                    </div>
+                    <div data-role="collapsible"  data-collapsed="false">
+                        <h3>General Information</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Name:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrName" style="text-align:left;width:100%;" value="#{vendorViewModel.name}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Email:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrEmail" style="text-align:left;width:100%;" value="#{vendorViewModel.email}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Phone:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrPhone" style="text-align:left;width:100%;"  value="#{vendorViewModel.phone}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Type:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:selectOneMenu style="text-align:left;width:100%;" id="usrType"
+                                                 required="true" value="#{vendorViewModel.type}">
+                                    <f:selectItem itemValue="Trusted" itemLabel="Trusted" />
+                                    <f:selectItem itemValue="Untrusted" itemLabel="Untrusted" />
+                                </h:selectOneMenu>
+                            </div>
+                        
+                    </div>
+                        </div>
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>Address</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Street:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrAddress" style="text-align:left;width:100%;" value="#{vendorViewModel.address}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                City:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrCity" style="text-align:left;width:100%;" value="#{vendorViewModel.city}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Postal:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="usrPostal" style="text-align:left;width:100%;" value="#{vendorViewModel.postalCode}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Province:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:selectOneMenu style="text-align:left;width:100%;" id="usrProvince"
+                                                 required="true" value="#{vendorViewModel.province}">
+                                    <f:selectItem itemValue="Ontario" itemLabel="Ontario" />
+                                    <f:selectItem itemValue="Alberta" itemLabel="Alberta" />
+                                    <f:selectItem itemValue="Quebec" itemLabel="Quebec" />
+                                </h:selectOneMenu>
+                            </div>
+                        
+                        </div>
+                        </div>
+                    <h:commandButton action="#{vendorViewModel.addVendor}" value="Add Vendor" id="addVendor" />
+                    <div id="box1"><h:outputText value="#{vendorViewModel.msg}" escape="false" /></div>
+                    <div data-role="footer" data-position="fixed" >
+                        <div data-role='navbar'>
+                        <ul>
+                            <m:MenuItem jsf="V" caption="Add Vendor" />
+                            <m:MenuItem jsf="P" caption="Add Product" />
+                            <m:MenuItem jsf="O" caption="Generate PO" />
+                        </ul>
+                            </div>
+                            <div data-role='navbar'>
+                                <ul>
+                                    <m:MenuItem jsf="B" caption="Product View" />
+                                    <m:MenuItem jsf="POV" caption="PO Viewer" />
+                                </ul>
+                            </div>                           
+                        </div>
+                    </div>
+                
+            </h:form>
+        </h:body>
+    </html>
+

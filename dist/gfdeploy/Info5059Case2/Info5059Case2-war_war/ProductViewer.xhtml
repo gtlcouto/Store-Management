@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:m="http://java.sun.com/jsf/composite/mnu"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:head>
+            <title>Product Viewer</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+          <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+            <style>#box1 { margin-left: 25%; margin-top: 55%; width:50%; border-style: solid; }</style>
+        </h:head>
+        <h:body>
+            <h:form>
+                <div data-role="page" id="home">
+                    <div data-role="header"><h1>Product Viewer</h1></div>
+                    <div data-role="content">
+                            <p>Product Viewer</p>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <h:selectOneMenu id="vendornos" value="#{productViewModel.vendorno}" required='true' >
+                                <f:selectItems value="#{vendorViewModel.vendornos}" />
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="ui-block-b">
+                             <h:commandButton action="#{productViewModel.changeVendor}" value='Pick Vendor'  />
+                            
+                        </div>
+                    </div>
+                    <ui:fragment rendered="#{productViewModel.vendorno != 0}">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h:selectOneMenu id="items" value="#{productViewModel.prodcd}" required='true' >
+                                    <f:selectItems value="#{productViewModel.items}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="ui-block-b">
+                                <h:commandButton action="#{productViewModel.productChanged()}" value='Pick Product'  />
+                            </div>
+                        </div>
+                   </ui:fragment>
+                   <ui:fragment rendered="#{productViewModel.prodcd != null}">
+                       <div data-role='collapsible-set' id='prodset'>
+                           <div data-role='collapsible' data-collapsed='true'>
+                               <h3>Information</h3>
+                               <div class="ui-grid-a">
+                                   <div class="ui-block-a">
+                                       Product Code:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="prodcd" value="#{productViewModel.prodcd}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       Product Name:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="prodname" value="#{productViewModel.prodname}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       Vendor SKU:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="sku" value="#{productViewModel.vendorsku}" />
+                                   </div>
+                               </div>
+                           </div>
+                           <div data-role='collapsible' data-collapsed='true'>
+                               <h3>Pricing</h3>
+                               <div class="ui-grid-a">
+                                   <div class="ui-block-a">
+                                       MSRP:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="msrp" value="$#{productViewModel.msrp}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       Cost:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="cost" value="$#{productViewModel.costprice}" />
+                                   </div>
+                               </div>
+                           </div>
+                          <div data-role="collapsible" data-collapsed="true">
+                                    <h3>QRCode</h3>
+                                    <h:graphicImage value="/QRCode?qrc=#{productViewModel.prodcd}" />                                                                            
+                          </div>
+                          <div data-role='collapsible' data-collapsed='true'>
+                               <h3>Inventory</h3>
+                              <div class="ui-grid-a">
+                                   <div class="ui-block-a">
+                                       EOQ:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="eoq" value="#{productViewModel.eoq}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       ROP:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="rop" value="#{productViewModel.rop}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       QOH:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="qoh" value="#{productViewModel.qoh}" />
+                                   </div>
+                                   <div class="ui-block-a">
+                                       QOO:
+                                   </div>
+                                   <div class='ui-block-b'>
+                                       <h:outputText id="qoo" value="#{productViewModel.qoo}" />
+                                   </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </ui:fragment>
+                    
+                    </div>
+                    <div data-role="footer" data-position="fixed" >
+                        <div data-role='navbar'>
+                        <ul>
+                            <m:MenuItem jsf="V" caption="Add Vendor" />
+                            <m:MenuItem jsf="P" caption="Add Product" />
+                            <m:MenuItem jsf="O" caption="Generate PO" />
+                        </ul>
+                            </div>
+                            <div data-role='navbar'>
+                                <ul>
+                                    <m:MenuItem jsf="B" caption="Product View" />
+                                    <m:MenuItem jsf="POV" caption="PO Viewer" />
+                                </ul>
+                            </div>                           
+                        </div>
+                    </div>
+                
+            </h:form>
+        </h:body>
+    </html>
+

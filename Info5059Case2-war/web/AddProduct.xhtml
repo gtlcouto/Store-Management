@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:m="http://java.sun.com/jsf/composite/mnu"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:head>
+            <title>Add Product</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+            <style>#box1 { margin-left: 25%; margin-top: 55%; width:50%; border-style: solid; }</style>
+        </h:head>
+        <h:body>
+            <h:form>
+                <div data-role="page" id="home">
+                    <div data-role="header"><h1>Add Product</h1></div>
+                    <div data-role="content">
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>Product Information</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Vendor No:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:selectOneMenu value="#{productViewModel.vendorno}" id="vendorno">
+                                    <f:selectItems value="#{vendorViewModel.vendornos}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="ui-block-a">
+                                Product Code:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdCode" style="text-align:left;width:100%;" value="#{productViewModel.prodcd}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Vendor SKU:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdSKU" style="text-align:left;width:100%;"  value="#{productViewModel.vendorsku}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Product Name:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdName" style="text-align:left;width:100%;"  value="#{productViewModel.prodname}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Cost Price:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdCost" style="text-align:left;width:100%;"  value="#{productViewModel.costprice}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                MSRP:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdMsrp" style="text-align:left;width:100%;"  value="#{productViewModel.msrp}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                QRCode Contents:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdQrcode" style="text-align:left;width:100%;"  value="#{productViewModel.qrcode}" size="5" />
+                            </div>
+                            
+                           </div>
+                        </div>
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>Inventory Information</h3>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Reorder Point:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdRop" style="text-align:left;width:100%;" value="#{productViewModel.rop}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Econ. order Qty:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdEoq" style="text-align:left;width:100%;" value="#{productViewModel.eoq}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Qty on Hand:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdQoh" style="text-align:left;width:100%;" value="#{productViewModel.qoh}" size="5" />
+                            </div>
+                            <div class="ui-block-a">
+                                Qty On Order:
+                            </div>
+                            <div class="ui-block-b">
+                                <h:inputText id="prdQoo" style="text-align:left;width:100%;" value="#{productViewModel.qoo}" size="5" />
+                            </div>
+                           </div>
+                        </div>
+                    <h:commandButton action="#{productViewModel.addProduct()}" value="Add Product" id="addProduct" />
+                    <div id="box1"><h:outputText value="#{productViewModel.msg}" escape="false" /></div>
+                    <div data-role="footer" data-position="fixed" >
+                        <div data-role='navbar'>
+                        <ul>
+                            <m:MenuItem jsf="V" caption="Add Vendor" />
+                            <m:MenuItem jsf="P" caption="Add Product" />
+                            <m:MenuItem jsf="O" caption="Generate PO" />
+                        </ul>
+                            </div>
+                            <div data-role='navbar'>
+                                <ul>
+                                    <m:MenuItem jsf="B" caption="Product View" />
+                                    <m:MenuItem jsf="POV" caption="PO Viewer" />
+                                </ul>
+                            </div>                           
+                        </div>
+                    </div>
+                
+            </h:form>
+        </h:body>
+    </html>
+
